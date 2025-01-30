@@ -12,7 +12,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-
 @Service
 public class UserServiceImpl implements UserService {
 
@@ -21,6 +20,7 @@ public class UserServiceImpl implements UserService {
     @Autowired
     public UserServiceImpl(UserJpaRepositorty userJpaRepositorty) {
         this.userJpaRepositorty = userJpaRepositorty;
+
     }
 
     @Override
@@ -32,24 +32,21 @@ public class UserServiceImpl implements UserService {
                 .collect(Collectors.toList());
 
     }
+
     @Override
-    public Boolean verificarUsername(String username, String password){
+    public Boolean verificarUsername(String username, String password) {
         
-      Optional<Users> userOpt =   userJpaRepositorty.findByuserName(username);
-        return userOpt.isPresent();      
-
-        
+        Optional<Users> userOpt = userJpaRepositorty.findByuserName(username);
+        return userOpt.isPresent();
     }
-    
-    public Boolean verificarUsername(String username){
-        
-      Optional<Users> userOpt =   userJpaRepositorty.findByuserName(username);
-        return userOpt.isPresent();      
 
-        
+    public Boolean verificarUsername(String username) {
+
+        Optional<Users> userOpt = userJpaRepositorty.findByuserName(username);
+        return userOpt.isPresent();
+
     }
-    
-    
+
     @Override
     public ResponseEntity<UsersDTO> getUserById(Long idUser) {
 

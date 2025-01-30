@@ -5,10 +5,10 @@
 package com.Project.WeTravel.Security;
 
 
-import com.Project.WeTravel.Users.application.UserService;
 import com.Project.WeTravel.Users.domain.CreateUserDTO;
 import com.Project.WeTravel.Users.domain.Users;
 import com.Project.WeTravel.Users.domain.UsersDTO;
+import com.Project.WeTravel.Users.infrastructure.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -24,7 +24,7 @@ public class LoginController {
     private JWTAuthtenticationConfig jwtAuthtenticationConfig;
 
     @Autowired
-    private UserService userService;
+    private UserServiceImpl userService;
 
     
 
@@ -46,7 +46,7 @@ public class LoginController {
     @PostMapping("/register")
     public ResponseEntity<?> register(@RequestBody CreateUserDTO createUserDTO) {
         try {
-            if(userService.verificarUsername(createUserDTO.getUserName())== false){
+            if(userService.verificarUsername(createUserDTO.getUserName())){
                 return ResponseEntity.badRequest().body("User already exits.");
             }
 
